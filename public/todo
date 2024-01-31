@@ -1,0 +1,13 @@
+// for (const recipes of savedRecipes) {
+//             console.log(recipes);
+//             for (const btn of btn_view) {
+//                 btn.addEventListener('click' , function () {
+//                     if (btn.parentElement.parentElement.dataset.id !== recipes.id) {
+//                         addToRecipes(food, btn)
+//                         } else {
+//                         console.log('ok');
+//                         }
+//                     })
+//             }
+           
+//         }
