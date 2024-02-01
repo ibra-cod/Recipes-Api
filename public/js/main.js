@@ -5,10 +5,8 @@ const popUp = document.getElementById('popUp')
 export const savedRecipes =  getRecipes('recipes');
 
 // console.log(savedRecipes);
-
-export const flashMessages = function (message, cssTag) {
+const flashMessages = function (message, cssTag, buttons) {
     const flashMessage = document.getElementById('flashMessage')
-
      flashMessage.innerHTML =
              `
                  <div class="${cssTag}"> 
@@ -16,14 +14,12 @@ export const flashMessages = function (message, cssTag) {
                  </div>
              `
  
-   
-        setTimeout(() => {
-           
-            flashMessage.style.display = 'none';
-         }, 4000);
-           
- }
+            setTimeout(() => {
+                flashMessage.style.display = 'none';
+         }, 1000);
+         flashMessage.style.display = 'block';
 
+ }
 
 
 // Display all the Food Data
@@ -51,7 +47,6 @@ const displayAllFoods = function (food,savedRecipes) {
                        </div
                  </div>
              `
-
      }
     } 
         const btn_view = document.querySelectorAll('.btnView');
@@ -63,23 +58,24 @@ const displayAllFoods = function (food,savedRecipes) {
         // });
 
         btn_view.forEach(x => {
+            const parentElement = x.parentElement.parentElement.dataset.id
             x.addEventListener('click' , function () {
-                        addToRecipes(food, x)
-                        flashMessages('Your recipe have been added success fully','alert-success')
+                const result = savedRecipes.filter(item => item.id === parentElement)
+                if (result == false) {
+                    addToRecipes(food, x)
+                    flashMessages('Added Succesfully !' , 'alert-success', btn_view)
+                } else {
+                    flashMessages(' Already Added !' , 'alert-danger', btn_view)
+                }
             })
         });
+
 
         const viewMore = document.querySelectorAll('.ViewMore')
         viewMore.forEach(btn => btn.addEventListener('click' , function () {
             const  grandParentDataset = btn.parentElement.parentElement.dataset.id; 
             hidePopUp(popUp, grandParentDataset, food)
         }));
-
-       
-           
-
-        
-
 
 
 } 
@@ -125,7 +121,7 @@ const displayPopUp = function (popUp,grandParentDataset, food) {
                           </div>
     
                             <div>
-                            <img  class="imgPopUp" id="imagePopUp" src="./images/close.png" alt="">
+                                    <img  class="imgPopUp" id="imagePopUp" src="./images/close.png" alt="">
                             </div>
                         `
                     }
@@ -144,7 +140,6 @@ const displayPopUp = function (popUp,grandParentDataset, food) {
 }
 
 const hidePopUp = function (popUp, grandParentDataset, food) {
-
         if (popUp) {
             displayPopUp(popUp, grandParentDataset, food)
         }
@@ -152,10 +147,6 @@ const hidePopUp = function (popUp, grandParentDataset, food) {
             popUp.parentElement.style.display = "none"
         }
 }
-
-
-
-
 
 const getDataWithInput = function (savedRecipes) {
     let input = document.getElementById("myInput");
