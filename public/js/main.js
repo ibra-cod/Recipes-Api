@@ -4,10 +4,15 @@ import {addToRecipes, getRecipes} from "../js/recipes.js";
 const popUp = document.getElementById('popUp')
 export const savedRecipes =  getRecipes('recipes');
 
+<<<<<<< HEAD
 console.log(savedRecipes);
 
 // console.log(savedRecipes);
 const flashMessages = function (message, cssTag, timer = 2000) {
+=======
+// console.log(savedRecipes);
+const flashMessages = function (message, cssTag, buttons) {
+>>>>>>> edcd966af4bb27b348e2873003e0e2223e40b59c
     const flashMessage = document.getElementById('flashMessage')
      flashMessage.innerHTML =
              `
@@ -15,9 +20,16 @@ const flashMessages = function (message, cssTag, timer = 2000) {
                      <p> ${message}</p>
                  </div>
              `
+<<<<<<< HEAD
             setTimeout(() => {
                 flashMessage.style.display = 'none';
          }, timer);
+=======
+ 
+            setTimeout(() => {
+                flashMessage.style.display = 'none';
+         }, 1000);
+>>>>>>> edcd966af4bb27b348e2873003e0e2223e40b59c
          flashMessage.style.display = 'block';
 
  }
@@ -66,9 +78,15 @@ const displayAllFoods = function (food,savedRecipes) {
                 const result = savedRecipes.filter(item => item.id === parentElement)
                 if (result == false) {
                     addToRecipes(food, x)
+<<<<<<< HEAD
                     flashMessages('Added Succesfully !' , 'alert-success', 2000)
                 } else {
                     flashMessages(' Already Added !' , 'alert-danger', 2000)
+=======
+                    flashMessages('Added Succesfully !' , 'alert-success', btn_view)
+                } else {
+                    flashMessages(' Already Added !' , 'alert-danger', btn_view)
+>>>>>>> edcd966af4bb27b348e2873003e0e2223e40b59c
                 }
             })
         });
