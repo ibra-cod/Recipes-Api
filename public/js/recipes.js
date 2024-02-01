@@ -2,23 +2,20 @@
 
 import {savedRecipes } from "../js/main.js";
 
-
+// getRecipes takes one parameter the name that have been set local.storage.setItem
+// parse the parameter then return it
 export const getRecipes = function (key) {
     const value = JSON.parse(localStorage.getItem(key)) ?? []
     if(localStorage) {
         return value
     };
 }
-
+// getRecipes takes one parameter the name that have been set local.storage.setItem
 const saveRecipes = function (key, value) {
     if (localStorage) {
         localStorage.setItem(key, JSON.stringify(value));
     }
-
 }
-
-
-
 
 
 // Set all the recipes from the LocalServer
@@ -40,21 +37,3 @@ const  parentDataset = btn.parentElement.parentElement.dataset.id;
   }
    
 }
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -4,26 +4,23 @@ import {addToRecipes, getRecipes} from "../js/recipes.js";
 const popUp = document.getElementById('popUp')
 export const savedRecipes =  getRecipes('recipes');
 
+console.log(savedRecipes);
+
 // console.log(savedRecipes);
-
-export const flashMessages = function (message, cssTag) {
+const flashMessages = function (message, cssTag, timer = 2000) {
     const flashMessage = document.getElementById('flashMessage')
-
      flashMessage.innerHTML =
              `
                  <div class="${cssTag}"> 
                      <p> ${message}</p>
                  </div>
              `
- 
-   
-        setTimeout(() => {
-           
-            flashMessage.style.display = 'none';
-         }, 4000);
-           
- }
+            setTimeout(() => {
+                flashMessage.style.display = 'none';
+         }, timer);
+         flashMessage.style.display = 'block';
 
+ }
 
 
 // Display all the Food Data
@@ -33,6 +30,7 @@ const displayAllFoods = function (food,savedRecipes) {
     if (food) {
     containerCards.innerHTML = '';
         for (const value of food) {
+            console.log(value);
              containerCards.innerHTML += 
              `
                  <div class="cardContainer" data-id="${value.idMeal}">
@@ -40,7 +38,8 @@ const displayAllFoods = function (food,savedRecipes) {
                          <img src="${value.strMealThumb}" class id="imgFood" alt="">
                      </div>
                      <div class="info meal">
-                        <div class="info> <p>${value.strMeal}</p> 
+                        <div class="infoMeal2">
+                            <p>${value.strMeal}</p> 
                             <p> ${value.strArea} </p> 
                         </div>
                         <div class="info> <p>${value.strMeal}</p> </div>
@@ -51,7 +50,6 @@ const displayAllFoods = function (food,savedRecipes) {
                        </div
                  </div>
              `
-
      }
     } 
         const btn_view = document.querySelectorAll('.btnView');
@@ -63,23 +61,24 @@ const displayAllFoods = function (food,savedRecipes) {
         // });
 
         btn_view.forEach(x => {
+            const parentElement = x.parentElement.parentElement.dataset.id
             x.addEventListener('click' , function () {
-                        addToRecipes(food, x)
-                        flashMessages('Your recipe have been added success fully','alert-success')
+                const result = savedRecipes.filter(item => item.id === parentElement)
+                if (result == false) {
+                    addToRecipes(food, x)
+                    flashMessages('Added Succesfully !' , 'alert-success', 2000)
+                } else {
+                    flashMessages(' Already Added !' , 'alert-danger', 2000)
+                }
             })
         });
+
 
         const viewMore = document.querySelectorAll('.ViewMore')
         viewMore.forEach(btn => btn.addEventListener('click' , function () {
             const  grandParentDataset = btn.parentElement.parentElement.dataset.id; 
             hidePopUp(popUp, grandParentDataset, food)
         }));
-
-       
-           
-
-        
-
 
 
 } 
@@ -93,6 +92,7 @@ const displayPopUp = function (popUp,grandParentDataset, food) {
                         `
                           <div class=imageContainer> 
                                 <img class="img" src="${value.strMealThumb}">
+                                    <p>${value.mealName}" </p>
                           </div> 
                           <div class=ingrediantsContainer> 
                                 <h3>Ingredients<h3>
@@ -125,7 +125,7 @@ const displayPopUp = function (popUp,grandParentDataset, food) {
                           </div>
     
                             <div>
-                            <img  class="imgPopUp" id="imagePopUp" src="./images/close.png" alt="">
+                                    <img  class="imgPopUp" id="imagePopUp" src="./images/close.png" alt="">
                             </div>
                         `
                     }
@@ -144,7 +144,6 @@ const displayPopUp = function (popUp,grandParentDataset, food) {
 }
 
 const hidePopUp = function (popUp, grandParentDataset, food) {
-
         if (popUp) {
             displayPopUp(popUp, grandParentDataset, food)
         }
@@ -152,10 +151,6 @@ const hidePopUp = function (popUp, grandParentDataset, food) {
             popUp.parentElement.style.display = "none"
         }
 }
-
-
-
-
 
 const getDataWithInput = function (savedRecipes) {
     let input = document.getElementById("myInput");
@@ -179,24 +174,39 @@ const displayAllSavedRecipes = function (data) {
     const cardContainer = document.getElementById('savedElements')
     cardContainer.innerHTML = ''
     if (data.length === 0 || data.length < 1 ) {
-        console.log('You have no saved Recipes');
+        flashMessages('You have no saved Recipes', 'alert-danger', 2000);     
     }
 
     for (const key of data) {
        cardContainer.innerHTML += 
        `
-       <div class="elements-save" class="clickable"> 
+       <div id="elementSaved" class="elements-save" data-id="${key.id}" > 
             <div class="cardDivImage">
                 <img id="imgFood" class="img clickable" src="${key.image}" alt="">
             </div>
             <div class="infoMeal">
-                <p id="p" >${key.mealName}</p>
-                <p>description</p>
+                <div class="info">
+                    <p id="p" >${key.mealName}</p>
+                </div>
+                <div class="info">
+                    <p></p>
+                </div>
+                <div class="info">
+                    <button id='BtnInfo' class='infoBtn'> see more </button>
+                </div>
             </div>
+            </div>
+            
        </div>
         
        `
     }
+
+    const BtnInfo = document.getElementById('BtnInfo')
+    const elementSaved = document.getElementById('elementSaved')
+    const elementSavedDataset = elementSaved.parentElement.parentElement.dataset.id
+
+   
 
 }
 

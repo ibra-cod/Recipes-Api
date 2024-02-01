@@ -37,7 +37,7 @@ input {
 }
 button {
     border: none;
-    padding:  0.9rem 2rem;
+    padding:  0.5rem 0.5rem;
     border-radius: 0.2rem;
     background-color: var(--black-color-text);
     color: var(--white-text-color);
@@ -178,6 +178,7 @@ a {
     margin-top: 8rem;
     margin: auto;
     align-items: center;
+    text-align: center;
     padding: 2rem;
 }
 
@@ -190,6 +191,7 @@ a {
     padding: 1.2rem 2rem;
     text-align: center;
     border-radius: 0.9rem;
+    position: sticky;
 }
 
 .alert-danger {
@@ -200,6 +202,8 @@ a {
     padding: 1.2rem 2rem;
     text-align: center;
     border-radius: 0.9rem;
+    position: sticky;
+
 }
 
 .flexelement {
@@ -213,11 +217,15 @@ a {
     left: 12rem;
 }
 
+.infoMeal2 {
+    color: #171D1C;
+}
+
 
 #popUp {
     position: relative;
     margin-top: rem;
-    width: 30%;
+    width: 250px;
     background-color: rebeccapurple;
     position: fixed;
     top: 50%;
@@ -262,16 +270,33 @@ a {
 }
 
 #imgFood {
-    width: 50%;
+    width: 100%;
 }
 
 .elements-save {
-    padding: 2rem;
+    text-align: center;
+    width: 85%;
+    background-color: #445f44;
+    margin: 30px;
 }
 
 .h1 {
     text-align: center;
     margin-top: 5rem;
+}
+
+.cardDivImage {
+    width: 100%;
+}
+
+.infoMeal {
+    padding: 1.5rem;
+   
+}
+
+.info {
+    padding: 0.1rem;
+    color: #fff;
 }
 
 
