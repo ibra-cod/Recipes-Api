@@ -78,15 +78,9 @@ const displayAllFoods = function (food,savedRecipes) {
                 const result = savedRecipes.filter(item => item.id === parentElement)
                 if (result == false) {
                     addToRecipes(food, x)
-<<<<<<< HEAD
-                    flashMessages('Added Succesfully !' , 'alert-success', 2000)
-                } else {
-                    flashMessages(' Already Added !' , 'alert-danger', 2000)
-=======
                     flashMessages('Added Succesfully !' , 'alert-success', btn_view)
                 } else {
                     flashMessages(' Already Added !' , 'alert-danger', btn_view)
->>>>>>> edcd966af4bb27b348e2873003e0e2223e40b59c
                 }
             })
         });
