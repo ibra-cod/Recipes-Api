@@ -20,7 +20,7 @@ const saveRecipes = function (key, value) {
 
 // Set all the recipes from the LocalServer
 export const addToRecipes = function (data, btn) {
-const  parentDataset = btn.parentElement.parentElement.dataset.id; 
+const  parentDataset = btn.parentElement.parentElement.parentElement.dataset.id; 
   for (const item of data) {
     if (item.idMeal === parentDataset) {
             savedRecipes.
@@ -32,8 +32,10 @@ const  parentDataset = btn.parentElement.parentElement.dataset.id;
                             city: item.strArea 
                         }
                     )
+                    console.log(saveRecipes);
                     saveRecipes('recipes', savedRecipes)
-        } 
-  }
+    } 
+      
+  } 
    
 }

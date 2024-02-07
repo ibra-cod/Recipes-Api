@@ -3,16 +3,9 @@ import {addToRecipes, getRecipes} from "../js/recipes.js";
 // Variables declarations 
 const popUp = document.getElementById('popUp')
 export const savedRecipes =  getRecipes('recipes');
-
-<<<<<<< HEAD
 console.log(savedRecipes);
 
-// console.log(savedRecipes);
 const flashMessages = function (message, cssTag, timer = 2000) {
-=======
-// console.log(savedRecipes);
-const flashMessages = function (message, cssTag, buttons) {
->>>>>>> edcd966af4bb27b348e2873003e0e2223e40b59c
     const flashMessage = document.getElementById('flashMessage')
      flashMessage.innerHTML =
              `
@@ -20,67 +13,63 @@ const flashMessages = function (message, cssTag, buttons) {
                      <p> ${message}</p>
                  </div>
              `
-<<<<<<< HEAD
             setTimeout(() => {
                 flashMessage.style.display = 'none';
          }, timer);
-=======
- 
-            setTimeout(() => {
-                flashMessage.style.display = 'none';
-         }, 1000);
->>>>>>> edcd966af4bb27b348e2873003e0e2223e40b59c
          flashMessage.style.display = 'block';
 
  }
 
 
 // Display all the Food Data
-const displayAllFoods = function (food,savedRecipes) {
+const displayAllFoods = function (food) {
 
    const containerCards = document.querySelector('.containerCards')
     if (food) {
-    containerCards.innerHTML = '';
+        containerCards.innerHTML = '';
         for (const value of food) {
-            console.log(value);
              containerCards.innerHTML += 
              `
-                 <div class="cardContainer" data-id="${value.idMeal}">
-                     <div class="cardDivImage">
-                         <img src="${value.strMealThumb}" class id="imgFood" alt="">
-                     </div>
-                     <div class="info meal">
+                <div class="cardContainer" data-id="${value.idMeal}">
+                    <div class="cardDivImage">
+                        <img src="${value.strMealThumb}" class id="imgFood" alt="">
+                    </div>
+                    <div class="info meal">
                         <div class="infoMeal2">
                             <p>${value.strMeal}</p> 
                             <p> ${value.strArea} </p> 
                         </div>
                         <div class="info> <p>${value.strMeal}</p> </div>
-                     </div>
-                       <div class="div-btns"> 
+                    </div>
+                    <div class="div-btns"> 
                         <button class="ViewMore" type="button"> View more </button>
-                        <button id="btn_view" class="btnView" type="button" href="../viewMore.html"> Save recipe </button>
-                       </div
-                 </div>
+                        <button id="btn_view" class="btnView" type="button" href="../viewMore.html"> Save recipe 
+                        </button>
+                    </div>
+                </div>
              `
      }
     } 
         const btn_view = document.querySelectorAll('.btnView');
         // btn_view.forEach(x => {
+        //     // console.log(x.parentElement.parentElement.parentElement.dataset);
         //     x.addEventListener('click' , function () {
+        //         console.log(x.parentElement.parentElement.parentElement);
         //         addToRecipes(food, x)
         //          flashMessages('Your recipe have been added success fully','alert-success')
         //     })
         // });
 
         btn_view.forEach(x => {
-            const parentElement = x.parentElement.parentElement.dataset.id
+            const parentElement = x.parentElement.parentElement.parentElement.dataset
+            console.log(parentElement);
             x.addEventListener('click' , function () {
                 const result = savedRecipes.filter(item => item.id === parentElement)
                 if (result == false) {
                     addToRecipes(food, x)
-                    flashMessages('Added Succesfully !' , 'alert-success', btn_view)
+                    flashMessages('Added Succesfully !' , 'alert-success', 1000)
                 } else {
-                    flashMessages(' Already Added !' , 'alert-danger', btn_view)
+                    flashMessages(' Already Added !' , 'alert-danger', 1000)
                 }
             })
         });
@@ -183,14 +172,13 @@ getDataWithInput(savedRecipes)
 
 
 const displayAllSavedRecipes = function (data) {
-    const cardContainer = document.getElementById('savedElements')
-    cardContainer.innerHTML = ''
-    if (data.length === 0 || data.length < 1 ) {
-        flashMessages('You have no saved Recipes', 'alert-danger', 2000);     
-    }
+    const savedElements = document.getElementById('savedElements')
+    if (savedElements) {
+        savedElements.innerHTML = ''
+   
 
     for (const key of data) {
-       cardContainer.innerHTML += 
+        savedElements.innerHTML += 
        `
        <div id="elementSaved" class="elements-save" data-id="${key.id}" > 
             <div class="cardDivImage">
@@ -213,13 +201,10 @@ const displayAllSavedRecipes = function (data) {
         
        `
     }
-
-    const BtnInfo = document.getElementById('BtnInfo')
-    const elementSaved = document.getElementById('elementSaved')
-    const elementSavedDataset = elementSaved.parentElement.parentElement.dataset.id
-
-   
-
+    }
+    // const BtnInfo = document.getElementById('BtnInfo')
+    // const elementSaved = document.getElementById('elementSaved')
+    // const elementSavedDataset = elementSaved.parentElement.parentElement.dataset.id
 }
 
 displayAllSavedRecipes(savedRecipes)
